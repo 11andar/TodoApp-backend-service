@@ -18,7 +18,7 @@ class TodoItem(Base):
     @staticmethod
     def set_end_of_day():
         current_date = datetime.now()
-        return current_date.replace(hour=23, minute=59, second=59)
+        return current_date.replace(hour=23, minute=59, second=59).date()
 
     due_date = Column(Date, default=set_end_of_day)
 
