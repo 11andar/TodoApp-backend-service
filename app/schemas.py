@@ -35,3 +35,7 @@ class TodoDelete(TodoBase):
     id: int
     message: str
 
+
+class TodoResponse(BaseModel):
+    data: TodoRead
+    success: bool
