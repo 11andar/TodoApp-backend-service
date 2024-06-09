@@ -21,3 +21,11 @@ class TodoRead(TodoBase):
 
     class Config:
         orm_mode = True
+
+
+class TodoUpdate(TodoBase):
+    title: Optional[str]
+    description: Optional[str] = None
+    priority: Optional[int] = 0
+    done: Optional[bool] = False
+    due_date: Optional[datetime.date] = None
