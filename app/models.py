@@ -9,9 +9,9 @@ Base = declarative_base()
 class TodoItem(Base):
     __tablename__ = 'todo_items'
 
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True, nullable=False)
-    description = Column(String)
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    description = Column(String, default=None)
     priority = Column(Integer, default=0, nullable=False)
     done = Column(Boolean, default=False)
 
