@@ -5,9 +5,10 @@ from models import TodoItem
 
 
 class TodoBase(BaseModel):
-    id: int
     title: str
-    description: Optional[str]
+    description: Optional[str] = None
     priority: int = 0
     done: bool = False
-    due_date: Optional[datetime.date] = Field(default_factory=TodoItem.set_end_of_day)
+    due_date: Optional[datetime.date] = None
+
+
