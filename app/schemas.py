@@ -29,3 +29,9 @@ class TodoUpdate(TodoBase):
     priority: Optional[int] = 0
     done: Optional[bool] = False
     due_date: Optional[datetime.date] = None
+
+
+class TodoDelete(TodoBase):
+    id: int
+    message: str
+
