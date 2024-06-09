@@ -12,3 +12,6 @@ class TodoBase(BaseModel):
     due_date: Optional[datetime.date] = None
 
 
+class TodoCreate(TodoBase):
+    due_date: Optional[datetime.date] = Field(default_factory=TodoItem.set_end_of_day)
+
