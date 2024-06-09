@@ -15,3 +15,9 @@ class TodoBase(BaseModel):
 class TodoCreate(TodoBase):
     due_date: Optional[datetime.date] = Field(default_factory=TodoItem.set_end_of_day)
 
+
+class TodoRead(TodoBase):
+    id: int
+
+    class Config:
+        orm_mode = True
