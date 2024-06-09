@@ -4,7 +4,7 @@ from typing import Optional
 from models import TodoItem
 
 
-class TodoItem(BaseModel):
+class TodoBase(BaseModel):
     id: int
     title: str
     description: Optional[str]
