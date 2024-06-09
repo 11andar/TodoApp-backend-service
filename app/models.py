@@ -1,9 +1,6 @@
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, Date, Boolean
-from sqlalchemy.ext.declarative import declarative_base
-
-
-Base = declarative_base()
+from database import Base
 
 
 class TodoItem(Base):
