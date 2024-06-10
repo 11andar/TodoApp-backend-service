@@ -8,7 +8,7 @@ router = APIRouter()
 
 
 @router.post("/todos/", response_model=schemas.TodoRead)
-async def create_todo_item(todo: schemas.TodoCreate, db: Session = Depends(get_db)):
+async def create_todo_item(todo: schemas.TodoBase, db: Session = Depends(get_db)):
     return crud.create_todo(db=db, todo=todo)
 
 
