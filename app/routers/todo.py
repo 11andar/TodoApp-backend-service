@@ -28,3 +28,11 @@ async def update_todo(todo_id: int, todo: schemas.TodoUpdate, db: Session = Depe
     if db_item:
         raise HTTPException(status_code=404, detail="Todo not found")
     return db_item
+
+
+@router.delete("/todos/{todo_id}", response_model=schemas.TodoDelete)
+async def delete_todo(todo_id: int, db: Session = Depends(get_db)):
+    db_item = crud.delete_todo(db=db, todo_id=todo_id)
+    if db_item is None:
+        raise HTTPException(status_code=404, detail="Todo not found")
+    return schemas.TodoDelete(db=db, todo_id=todo_id, message="Todo deleted")
