@@ -29,3 +29,9 @@ def update_todo(db: Session, id: int, todo: TodoUpdate) -> TodoItem:
     return db_item
 
 
+def delete_todo(db: Session, id: int) -> None:
+    db_item = db.query(TodoItem).filter(TodoItem.id == id).first()
+    if db_item:
+        db.delete(db_item)
+        db.commit()
+    return db_item
