@@ -20,11 +20,6 @@ class TodoBase(BaseModel):
         from_attributes = True
         arbitrary_types_allowed = True
 
-
-class TodoCreate(TodoBase):
-    pass
-
-
 class TodoRead(TodoBase):
     id: int
 

@@ -1,10 +1,10 @@
 from typing import Type
 from sqlalchemy.orm import Session
 from app.models import TodoItem
-from app.schemas import TodoCreate, TodoUpdate, TodoDelete
+from app.schemas import TodoBase, TodoUpdate, TodoDelete
 
 
-def create_todo(db: Session, todo: TodoCreate) -> TodoItem:
+def create_todo(db: Session, todo: TodoBase) -> TodoItem:
     db_item = TodoItem(**todo.dict())
     db.add(db_item)
     db.commit()
