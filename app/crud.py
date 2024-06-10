@@ -1,3 +1,4 @@
+from typing import Type
 from sqlalchemy.orm import Session
 from models import TodoItem
 from schemas import TodoCreate, TodoUpdate
@@ -15,7 +16,7 @@ def get_todo_item(db: Session, todo_id: int) -> TodoItem:
     return db.query(TodoItem).filter(TodoItem.id == todo_id).first()
 
 
-def get_todos(db: Session, skip: int = 0, limit: int = 10) -> list[TodoItem]:
+def get_todos(db: Session, skip: int = 0, limit: int = 10) -> list[Type[TodoItem]]:
     return db.query(TodoItem).offset(skip).limit(limit).all()
 
 
