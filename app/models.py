@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Date, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from database import Base
 
 
@@ -16,7 +16,7 @@ class TodoItem(Base):
     description = Column(String, default=None)
     priority = Column(Integer, default=0, nullable=False)
     done = Column(Boolean, default=False)
-    due_date = Column(Date, default=set_end_of_current_day)
+    due_date = Column(DateTime, default=set_end_of_current_day)
 
     def __repr__(self):
         return f"""Title: {self.title}, Due date: {self.due_date}"""
