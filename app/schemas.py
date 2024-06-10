@@ -37,11 +37,6 @@ class TodoUpdate(TodoBase):
     due_date: Optional[datetime.date] = None
 
 
-class TodoDelete(TodoBase):
-    id: int
+class TodoDelete(TodoRead):
     message: str
 
-
-class TodoResponse(BaseModel):
-    data: TodoRead
-    success: bool
