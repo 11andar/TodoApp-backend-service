@@ -28,9 +28,6 @@ class TodoCreate(TodoBase):
 class TodoRead(TodoBase):
     id: int
 
-    class Config:
-        orm_mode = True
-
 
 class TodoUpdate(TodoBase):
     title: Optional[str]
