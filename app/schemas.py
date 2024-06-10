@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, SkipValidation
 from datetime import datetime
 from typing import Optional
-from models import set_end_of_current_day
+from app.models import set_end_of_current_day
 
 
 class TodoBase(BaseModel):

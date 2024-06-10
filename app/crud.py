@@ -1,7 +1,7 @@
 from typing import Type
 from sqlalchemy.orm import Session
-from models import TodoItem
-from schemas import TodoCreate, TodoUpdate
+from app.models import TodoItem
+from app.schemas import TodoCreate, TodoUpdate
 
 
 def create_todo(db: Session, todo: TodoCreate) -> TodoItem:

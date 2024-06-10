@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
-from database import Base
+from app.database import Base
 
 
 def set_end_of_current_day() -> datetime:
