@@ -14,7 +14,7 @@ class TodoItem(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String, nullable=False)
     description = Column(String, default=None)
-    priority = Column(Integer, default=0, nullable=False)
+    priority = Column(Integer, default=0)
     done = Column(Boolean, default=False)
     due_date = Column(DateTime, default=set_end_of_current_day)
 
