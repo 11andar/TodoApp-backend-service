@@ -18,3 +18,10 @@ def db_session():
     yield session
     session.close()
     Base.metadata.drop_all(bind=engine)
+
+
+def test_set_end_of_current_day(db_session):
+    current_day = datetime.utcnow()
+    end_of_current_day = current_day.replace(hour=23, minute=59, second=59, microsecond=999999)
+    date_returned = set_end_of_current_day()
+    assert date_returned == end_of_current_day
