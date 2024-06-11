@@ -39,6 +39,13 @@ def test_get_todo_item(mock_db):
     assert result == todo_item
 
 
+def test_get_todo_item(mock_db):
+    todo_item = None
+    mock_db.query.return_value.filter.return_value.first.return_value = todo_item
+    result = get_todo_item(mock_db, 1)
+    assert result == todo_item
+
+
 def test_get_todos(mock_db):
     todos = [TodoItem(title="Test Todo", id=i) for i in range(10)]
     mock_db.query.return_value.offset.return_value.limit.return_value.all.return_value = todos
