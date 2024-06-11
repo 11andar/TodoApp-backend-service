@@ -1,7 +1,6 @@
-import pytest
 from datetime import datetime
 from app.models import set_end_of_current_day
-from app.schemas import TodoBase, TodoRead, TodoUpdate, TodoDelete
+from app.schemas import TodoBase
 
 
 def test_todo_base_due_date_none():
@@ -21,3 +20,9 @@ def test_todo_base_due_date_exists():
     data = {"due_date": date}
     test_base = TodoBase(**data)
     assert test_base.due_date == date
+
+
+def test_todo_base_priority_lt_zero():
+    data = {"priority": -1}
+    test_base = TodoBase(**data)
+    assert test_base.priority == 0
