@@ -39,7 +39,7 @@ def test_get_todo_item(mock_db):
     assert result == todo_item
 
 
-def test_get_todo_item(mock_db):
+def test_get_todo_item_not_found(mock_db):
     todo_item = None
     mock_db.query.return_value.filter.return_value.first.return_value = todo_item
     result = get_todo_item(mock_db, 1)
@@ -69,3 +69,19 @@ def test_get_todos_offset_exceeds(mock_db):
     mock_db.query.return_value.offset.return_value.limit.return_value.all.return_value = expected_result
     result = get_todos(mock_db, offset)
     assert result == expected_result
+
+
+def test_update_todo(mock_db):
+    todo_item = TodoItem(id=1, title="Test Title", description="Test Description")
+    mock_db.query.return_value.filter.return_value.first.return_value = todo_item
+    todo_update = TodoUpdate(title="Update Title", description="Update Description")
+    updated_todo = update_todo(mock_db, 1, todo_update)
+    assert updated_todo.title == "Update Title"
+    assert updated_todo.description == "Update Description"
+
+
+def test_update_todo_not_found(mock_db):
+    mock_db.query().filter().first.return_value = None
+    todo_update = TodoUpdate(title="Update Title", description="Update Description")
+    updated_todo = update_todo(mock_db, 1, todo_update)
+    assert updated_todo is None
