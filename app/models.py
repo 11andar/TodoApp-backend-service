@@ -12,7 +12,7 @@ class TodoItem(Base):
     __tablename__ = 'todo_items'
 
     id = Column(Integer, primary_key=True)
-    title = Column(String, nullable=False)
+    title = Column(String, default="Todo Item", nullable=False)
     description = Column(String, default=None)
     priority = Column(Integer, default=0)
     done = Column(Boolean, default=False)
