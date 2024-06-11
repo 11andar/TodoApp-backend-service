@@ -7,13 +7,18 @@ from app.models import set_end_of_current_day
 class TodoBase(BaseModel):
     title: str
     description: Optional[str] = None
-    priority: int = 0
+    priority: Optional[int] = 0
     done: bool = False
     due_date: Optional[datetime] = Field(defaul=None, validator=SkipValidation)
 
     def __init__(self, **data):
         if 'due_date' not in data or data['due_date'] is None:
             data['due_date'] = set_end_of_current_day()
+        if 'priority' in data:
+            if data['priority'] < 0:
+                data['priority'] = 0
+            elif data['priority'] > 4:
+                data['priority'] = 4
         super().__init__(**data)
 
     class Config:
