@@ -26,3 +26,9 @@ def test_todo_base_priority_lt_zero():
     data = {"priority": -1}
     test_base = TodoBase(**data)
     assert test_base.priority == 0
+
+
+def test_todo_base_priority_gt_four():
+    data = {"priority": 5}
+    test_base = TodoBase(**data)
+    assert test_base.priority == 4
