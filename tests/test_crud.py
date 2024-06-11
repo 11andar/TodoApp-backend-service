@@ -26,6 +26,7 @@ def test_create_todo(mock_db):
     created_todo = create_todo(mock_db, todo_data)
 
     assert isinstance(created_todo, TodoItem)
+    assert created_todo.title == "Test Todo"
     mock_db.add.assert_called_once()
     mock_db.commit.assert_called_once()
     mock_db.refresh.assert_called_once_with(created_todo)
