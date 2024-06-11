@@ -32,3 +32,9 @@ def test_todo_base_priority_gt_four():
     data = {"priority": 5}
     test_base = TodoBase(**data)
     assert test_base.priority == 4
+
+
+def test_todo_base_priority_valid():
+    data = {"priority": 3}
+    test_base = TodoBase(**data)
+    assert test_base.priority == 3
