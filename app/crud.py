@@ -1,7 +1,7 @@
 from typing import Type
 from sqlalchemy.orm import Session
 from app.models import TodoItem
-from app.schemas import TodoBase, TodoUpdate, TodoDelete
+from app.schemas import TodoBase, TodoUpdate
 
 
 def create_todo(db: Session, todo: TodoBase) -> TodoItem:
@@ -21,7 +21,7 @@ def get_todos(db: Session, skip: int = 0, limit: int = 10) -> list[Type[TodoItem
 
 
 def update_todo(db: Session, todo_id: int, todo: TodoUpdate) -> TodoItem:
-    db_item = get_todo_item(todo_id)
+    db_item = db.query(TodoItem).filter(TodoItem.id == todo_id).first()
     if db_item:
         for key, value in todo.dict(exclude_unset=True).items():
             setattr(db_item, key, value)
@@ -30,7 +30,7 @@ def update_todo(db: Session, todo_id: int, todo: TodoUpdate) -> TodoItem:
     return db_item
 
 
-def delete_todo(db: Session, todo_id: int) -> TodoDelete:
+def delete_todo(db: Session, todo_id: int) -> TodoBase:
     db_item = db.query(TodoItem).filter(TodoItem.id == todo_id).first()
     if db_item:
         db.delete(db_item)
