@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import MagicMock
 from sqlalchemy.orm import Session
 from app.models import TodoItem
-from app.schemas import TodoBase
+from app.schemas import TodoBase, TodoUpdate
 from app.crud import (
     create_todo,
     get_todo_item,
@@ -54,3 +54,11 @@ def test_get_todos_offset_limit(mock_db):
     mock_db.query.return_value.offset.return_value.limit.return_value.all.return_value = expected_result
     result = get_todos(mock_db, offset, limit)
     assert [todo for todo in result] == [todo for todo in expected_result]
+
+
+def test_get_todos_offset_exceeds(mock_db):
+    offset = 16
+    expected_result = []
+    mock_db.query.return_value.offset.return_value.limit.return_value.all.return_value = expected_result
+    result = get_todos(mock_db, offset)
+    assert result == expected_result
