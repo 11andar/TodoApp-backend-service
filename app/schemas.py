@@ -5,7 +5,7 @@ from app.models import set_end_of_current_day
 
 
 class TodoBase(BaseModel):
-    title: str
+    title: str = "Todo Item"
     description: Optional[str] = None
     priority: Optional[int] = 0
     done: bool = False
