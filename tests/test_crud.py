@@ -85,3 +85,16 @@ def test_update_todo_not_found(mock_db):
     todo_update = TodoUpdate(title="Update Title", description="Update Description")
     updated_todo = update_todo(mock_db, 1, todo_update)
     assert updated_todo is None
+
+
+def test_delete_todo(mock_db):
+    todo_item = TodoItem(id=1, title="Test Title", description="Test Description")
+    mock_db.query.return_value.filter.return_value.first.return_value = todo_item
+    deleted_todo = delete_todo(mock_db, 1)
+    assert deleted_todo == todo_item
+
+
+def test_delete_todo_not_found(mock_db):
+    mock_db.query().filter().first.return_value = None
+    deleted_todo = delete_todo(mock_db, 1)
+    assert deleted_todo is None
