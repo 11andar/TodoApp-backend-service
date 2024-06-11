@@ -30,3 +30,10 @@ def test_create_todo(mock_db):
     mock_db.add.assert_called_once()
     mock_db.commit.assert_called_once()
     mock_db.refresh.assert_called_once_with(created_todo)
+
+
+def test_get_todo_item(mock_db):
+    todo_item = TodoItem(title="Test Todo", id=1)
+    mock_db.query.return_value.filter.return_value.first.return_value = todo_item
+    result = get_todo_item(mock_db, 1)
+    assert result == todo_item
