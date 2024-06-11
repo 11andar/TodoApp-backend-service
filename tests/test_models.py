@@ -27,11 +27,11 @@ def test_set_end_of_current_day(db_session):
     assert date_returned == end_of_current_day
 
 
-def test_todo_item_init(db_session):
-    todo_item = TodoItem(title="test")
+def test_todo_item_default(db_session):
+    todo_item = TodoItem()
     db_session.add(todo_item)
     db_session.commit()
-    assert todo_item.title == "test"
+    assert todo_item.title == "Todo Item"
     assert todo_item.description is None
     assert todo_item.priority == 0
     assert todo_item.done == False
