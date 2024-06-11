@@ -28,3 +28,20 @@ def setup() -> None:
 
 def teardown() -> None:
     Base.metadata.drop_all(bind=engine)
+
+
+def test_create_todo_item():
+    response = client.post(
+        "/todos/", json={"title": "Test Title",
+                         "description": "Test Description",
+                         "priority": 1,
+                         "done": False,
+                         }
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["title"] == "Test Title"
+    assert data["description"] == "Test Description"
+    assert data["priority"] == 1
+    assert data["done"] == False
+    assert "id" in data
