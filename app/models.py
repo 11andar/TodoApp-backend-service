@@ -5,7 +5,7 @@ from app.database import Base
 
 def set_end_of_current_day() -> datetime:
     current_day = datetime.utcnow()
-    return current_day.replace(hour=23, minute=59, second=59)
+    return current_day.replace(hour=23, minute=59, second=59, microsecond=999999)
 
 
 class TodoItem(Base):
