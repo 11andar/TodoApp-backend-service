@@ -57,3 +57,12 @@ def test_todo_item_custom(db_session):
     assert test_item.priority == custom_priority
     assert test_item.done == custom_done
     assert test_item.due_date == custom_due_date
+
+
+def test_repr_method(db_session):
+    todo_item = TodoItem(title="Repr Task")
+    db_session.add(todo_item)
+    db_session.commit()
+
+    expected_repr = f"Title: Repr Task, Due date: {todo_item.due_date}"
+    assert repr(todo_item) == expected_repr
