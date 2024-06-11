@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, StaticPool
 from sqlalchemy.orm import sessionmaker
@@ -18,3 +20,11 @@ def override_get_db():
     database = TestingSessionLocal()
     yield database
     database.close()
+
+
+def setup() -> None:
+    Base.metadata.create_all(bind=engine)
+
+
+def teardown() -> None:
+    Base.metadata.drop_all(bind=engine)
