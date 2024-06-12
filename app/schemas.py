@@ -9,7 +9,7 @@ class TodoBase(BaseModel):
     description: Optional[str] = None
     priority: Optional[int] = 0
     done: bool = False
-    due_date: Optional[datetime] = Field(defaul=None, validator=SkipValidation)
+    due_date: Optional[datetime] = Field(default=None, validator=SkipValidation)
 
     def __init__(self, **data):
         if 'due_date' not in data or data['due_date'] is None:
