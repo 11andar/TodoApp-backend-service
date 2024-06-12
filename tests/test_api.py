@@ -91,3 +91,22 @@ def test_get_todos(db_session):
         assert any(todo["id"] == created_todo["id"] for todo in data)
         assert any(todo["title"] == created_todo["title"] for todo in data)
         assert any(todo["description"] == created_todo["description"] for todo in data)
+
+
+def test_update_todo(db_session):
+    response = client.post("/todos/", json={
+        "title": "Test Title",
+        "description": "Test Description",
+    })
+    assert response.status_code == 200
+    data = response.json()
+    todo_id = data["id"]
+
+    response = client.put(f"/todos/{todo_id}", json={
+        "title": "Update Title",
+        "description": "Update Description",
+    })
+    assert response.status_code == 200
+    data = response.json()
+    assert data["title"] == "Update Title"
+    assert data["description"] == "Update Description"
