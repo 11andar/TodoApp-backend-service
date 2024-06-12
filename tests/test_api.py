@@ -66,3 +66,28 @@ def test_get_todo_item(db_session):
     assert data["title"] == "Test Title"
     assert data["description"] == "Test Description"
     assert data["id"] == todo_id
+
+
+def test_get_todos(db_session):
+    todos = [
+        {"title": "Test Title 1", "description": "Test Description 1"},
+        {"title": "Test Title 2", "description": "Test Description 2"},
+        {"title": "Test Title 3", "description": "Test Description 3"},
+    ]
+
+    created_todos = []
+    for todo in todos:
+        response = client.post("/todos/", json=todo)
+        assert response.status_code == 200
+        created_todos.append(response.json())
+
+    response = client.get("/todos/")
+    assert response.status_code == 200
+    data = response.json()
+
+    assert len(data) == len(created_todos)
+
+    for created_todo in created_todos:
+        assert any(todo["id"] == created_todo["id"] for todo in data)
+        assert any(todo["title"] == created_todo["title"] for todo in data)
+        assert any(todo["description"] == created_todo["description"] for todo in data)
