@@ -110,3 +110,18 @@ def test_update_todo(db_session):
     data = response.json()
     assert data["title"] == "Update Title"
     assert data["description"] == "Update Description"
+
+
+def test_delete_todo(db_session):
+    response = client.post("/todos/", json={
+        "title": "Test Title",
+        "description": "Test Description",
+    })
+    assert response.status_code == 200
+    data = response.json()
+    todo_id = data["id"]
+
+    response = client.delete(f"/todos/{todo_id}")
+    assert response.status_code == 200
+    response = client.delete(f"/todos/{todo_id}")
+    assert response.status_code == 404
