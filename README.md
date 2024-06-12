@@ -1,6 +1,6 @@
 # todo_app
 
-Backend service for Todo App following RESTful API design principles.
+Todo App backend service built with FastAPI.
 
 ## Tech Stack
 
@@ -12,6 +12,13 @@ Backend service for Todo App following RESTful API design principles.
 <img src="https://assets.getpostman.com/common-share/postman-logo-horizontal-white.svg" width="auto" height="50" alt="Postman">
 
 [//]: # (<img src="https://logo.clearbit.com/docker.com" width="auto" height="50" alt="Docker">)
+
+
+## Overview
+
+This project is a Todo application backend service designed to manage CRUD operations efficiently. The application 
+adheres to RESTful API design principles. It leverages the FastAPI framework for building robust APIs with Python 
+and SQLAlchemy for interaction with the database.
 
 
 ## Installation
