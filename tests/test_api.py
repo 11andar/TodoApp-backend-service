@@ -1,4 +1,4 @@
-from datetime import datetime
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, StaticPool
 from sqlalchemy.orm import sessionmaker
@@ -21,15 +21,17 @@ def override_get_db():
     database.close()
 
 
-def setup() -> None:
+app.dependency_overrides[get_db] = override_get_db
+
+
+@pytest.fixture(scope="function")
+def db_session():
     Base.metadata.create_all(bind=engine)
-
-
-def teardown() -> None:
+    yield
     Base.metadata.drop_all(bind=engine)
 
 
-def test_create_todo_item():
+def test_create_todo_item(db_session):
     response = client.post(
         "/todos/", json={
                          "title": "Test Title",
@@ -47,7 +49,7 @@ def test_create_todo_item():
     assert "id" in data
 
 
-def test_get_todo_item():
+def test_get_todo_item(db_session):
     response = client.post(
         "/todos/", json={
                         "title": "Test Title",
@@ -64,4 +66,3 @@ def test_get_todo_item():
     assert data["title"] == "Test Title"
     assert data["description"] == "Test Description"
     assert data["id"] == todo_id
-
